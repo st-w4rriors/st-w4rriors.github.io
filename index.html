@@ -1612,24 +1612,71 @@ footer strong {
     SQUAD // 2026
 
 </footer>
-      <audio id="bgMusic" loop preload="auto">
+<audio id="bgMusic" loop preload="auto">
     <source src="index.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 const bgMusic = document.getElementById("bgMusic");
 
-function startMusic() {
-    bgMusic.play()
-        .then(() => {
-            document.removeEventListener("pointerdown", startMusic);
-        })
-        .catch(() => {
-            // Keep listener active if playback fails
-        });
+const savedTime = sessionStorage.getItem("stWarriorsMusicTime");
+
+if (savedTime !== null) {
+    bgMusic.currentTime = parseFloat(savedTime);
 }
 
+function startMusic() {
+    if (bgMusic.paused) {
+        bgMusic.play().catch(() => {});
+    }
+}
+
+// Start/resume after user interaction
 document.addEventListener("pointerdown", startMusic);
+
+// Save exact position continuously
+setInterval(() => {
+    if (!bgMusic.paused) {
+        sessionStorage.setItem(
+            "stWarriorsMusicTime",
+            bgMusic.currentTime
+        );
+    }
+}, 250);
+
+// Save immediately when leaving the page
+window.addEventListener("pagehide", () => {
+    sessionStorage.setItem(
+        "stWarriorsMusicTime",
+        bgMusic.currentTime
+    );
+});
+
+// Restore when coming back through browser Back
+window.addEventListener("pageshow", () => {
+    const time = sessionStorage.getItem("stWarriorsMusicTime");
+
+    if (time !== null) {
+        bgMusic.currentTime = parseFloat(time);
+    }
+
+    bgMusic.play().catch(() => {
+        // Browser may require a tap
+    });
+});
+
+// Restore when page becomes visible again
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        const time = sessionStorage.getItem("stWarriorsMusicTime");
+
+        if (time !== null) {
+            bgMusic.currentTime = parseFloat(time);
+        }
+
+        bgMusic.play().catch(() => {});
+    }
+});
 </script>
 
 
