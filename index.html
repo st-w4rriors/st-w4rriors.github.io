@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, user-scalable=no">
+
+<meta name="theme-color" content="#07080b">
+
+<meta name="description"
+      content="ST WARRIORS — One squad. Different warriors.">
+
+<title>ST WARRIORS</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(255,45,45,.14),
+            transparent 38%
+        ),
+        #07080b;
+
+    color: #fff;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   GLOBAL GRID
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size: 35px 35px;
+
+    pointer-events: none;
+
+    z-index: -5;
+}
+
+
+/* =========================================================
+   SCANLINES
+========================================================= */
+
+body::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255,255,255,.012) 4px
+        );
+
+    pointer-events: none;
+
+    z-index: 30;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 78vh;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding:
+        24px
+        18px
+        55px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TOP HUD
+========================================================= */
+
+.top-hud {
+
+    width: min(430px, 94%);
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px 11px;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    background:
+        rgba(8,9,13,.72);
+
+    backdrop-filter: blur(8px);
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    color: #777;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+.top-hud::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 32px;
+    height: 2px;
+
+    background: #ff3030;
+}
+
+
+.hud-online {
+
+    color: #35e879;
+}
+
+
+.hud-online::before {
+
+    content: "";
+
+    display: inline-block;
+
+    width: 5px;
+    height: 5px;
+
+    margin-right: 5px;
+
+    border-radius: 50%;
+
+    background: #35e879;
+
+    box-shadow:
+        0 0 8px #35e879;
+
+    animation: pulse 1.5s infinite;
+}
+
+
+@keyframes pulse {
+
+    50% {
+        opacity: .35;
+    }
+}
+
+
+/* =========================================================
+   SQUAD EMBLEM
+========================================================= */
+
+.emblem {
+
+    width: 82px;
+    height: 82px;
+
+    margin-top: 24px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-family:
+        Impact,
+        "Arial Narrow Bold",
+        sans-serif;
+
+    font-size: 25px;
+
+    letter-spacing: -1px;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #181a20,
+            #090a0d
+        );
+
+    border:
+        2px solid rgba(255,48,48,.7);
+
+    transform: rotate(45deg);
+
+    box-shadow:
+        0 0 25px rgba(255,48,48,.12);
+
+    z-index: 4;
+}
+
+
+.emblem span {
+
+    transform: rotate(-45deg);
+
+    color: #ff3030;
+
+    text-shadow:
+        0 0 12px rgba(255,48,48,.4);
+}
+
+
+.emblem::before,
+.emblem::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 12px;
+    height: 12px;
+}
+
+
+.emblem::before {
+
+    top: -7px;
+    left: -7px;
+
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+}
+
+
+.emblem::after {
+
+    bottom: -7px;
+    right: -7px;
+
+    border-bottom: 2px solid #ff3030;
+    border-right: 2px solid #ff3030;
+}
+
+
+/* =========================================================
+   CROSSHAIR
+========================================================= */
+
+.crosshair {
+
+    position: absolute;
+
+    top: 47%;
+
+    left: 50%;
+
+    width: 250px;
+    height: 250px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border:
+        1px solid rgba(255,255,255,.035);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+.crosshair::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 50px;
+
+    border:
+        1px solid rgba(255,48,48,.08);
+
+    border-radius: 50%;
+}
+
+
+.crosshair::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+    right: 0;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,48,48,.2),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.title {
+
+    margin-top: 34px;
+
+    font-family:
+        Impact,
+        Haettenschweiler,
+        "Arial Narrow Bold",
+        sans-serif;
+
+    font-size:
+        clamp(64px, 18vw, 135px);
+
+    line-height: .76;
+
+    letter-spacing: -2px;
+
+    text-transform: uppercase;
+
+    transform: skewX(-5deg);
+
+    position: relative;
+
+    z-index: 5;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(0 12px 25px rgba(0,0,0,.7));
+}
+
+
+.title .st {
+
+    display: block;
+
+    color: #ff3030;
+
+    text-shadow:
+        3px 3px 0 #650d0d,
+        0 0 30px rgba(255,48,48,.25);
+}
+
+
+.title .warriors {
+
+    display: block;
+
+    color: #f2f2f2;
+
+    margin-left: 10px;
+
+    text-shadow:
+        3px 3px 0 #4b4b4b,
+        0 0 25px rgba(255,255,255,.1);
+}
+
+
+/* =========================================================
+   TITLE SLASH
+========================================================= */
+
+.title-line {
+
+    width: 175px;
+    height: 4px;
+
+    margin:
+        28px auto
+        20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff3030 25%,
+            #fff 75%,
+            transparent
+        );
+
+    transform: skewX(-25deg);
+
+    box-shadow:
+        0 0 15px rgba(255,48,48,.35);
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   DIALOGUE
+========================================================= */
+
+.dialogue {
+
+    max-width: 390px;
+
+    padding:
+        0 22px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(16px, 4.5vw, 21px);
+
+    line-height: 1.45;
+
+    font-style: italic;
+
+    color: #ddd;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+.dialogue::before {
+
+    content: "“";
+
+    position: absolute;
+
+    left: 0;
+    top: -12px;
+
+    font-size: 42px;
+
+    color: #ff3030;
+}
+
+
+.dialogue::after {
+
+    content: "”";
+
+    color: #ff3030;
+
+    font-size: 42px;
+
+    position: relative;
+
+    top: 13px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+
+    margin-top: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #777;
+
+    position: relative;
+
+    z-index: 5;
+
+    animation:
+        statusChange 4s infinite;
+}
+
+
+.status-dot {
+
+    width: 5px;
+    height: 5px;
+
+    background: #ff3030;
+
+    box-shadow:
+        0 0 8px #ff3030;
+}
+
+
+@keyframes statusChange {
+
+    0%, 30% {
+        opacity: 1;
+    }
+
+    35%, 40% {
+        opacity: .35;
+    }
+
+    45%, 100% {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   LOADING BAR
+========================================================= */
+
+.loading {
+
+    width: min(290px, 80%);
+
+    margin-top: 18px;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+.loading-track {
+
+    width: 100%;
+    height: 3px;
+
+    background: #1b1d23;
+
+    overflow: hidden;
+}
+
+
+.loading-progress {
+
+    height: 100%;
+
+    width: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3030,
+            #ff6666
+        );
+
+    box-shadow:
+        0 0 10px rgba(255,48,48,.5);
+
+    animation:
+        loading 3s ease-out forwards;
+}
+
+
+@keyframes loading {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+
+.loading-label {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 6px;
+
+    font-family: monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+
+    color: #555;
+}
+
+
+/* =========================================================
+   SQUAD
+========================================================= */
+
+.squad {
+
+    width: min(1150px, 100%);
+
+    margin: auto;
+
+    padding:
+        5px
+        14px
+        70px;
+}
+
+
+.section-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+
+.section-heading::before {
+
+    content: "";
+
+    width: 5px;
+    height: 28px;
+
+    background: #ff3030;
+
+    box-shadow:
+        0 0 12px rgba(255,48,48,.45);
+}
+
+
+.section-heading h2 {
+
+    font-size: 19px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+.section-heading small {
+
+    margin-left: auto;
+
+    color: #555;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   PLAYER GRID
+========================================================= */
+
+.player-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   PLAYER CARD
+========================================================= */
+
+.player-card {
+
+    display: block;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #15171d,
+            #0b0c10
+        );
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.player-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(255,48,48,.5);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.55),
+        0 0 20px rgba(255,48,48,.08);
+}
+
+
+.player-card:active {
+
+    transform:
+        scale(.975);
+}
+
+
+.player-card:focus-visible {
+
+    outline:
+        3px solid #ff3030;
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   PORTRAIT PHOTO
+   4:5 — INSTAGRAM PORTRAIT
+========================================================= */
+
+.photo-frame {
+
+    width: 100%;
+
+    aspect-ratio: 4 / 5;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1a1c22,
+            #08090c
+        );
+}
+
+
+/* Image */
+
+.photo-frame img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    position: relative;
+
+    z-index: 2;
+
+    transition:
+        transform .5s ease,
+        filter .5s ease;
+}
+
+
+.player-card:hover
+.photo-frame img {
+
+    transform: scale(1.045);
+
+    filter:
+        saturate(1.08)
+        contrast(1.05);
+}
+
+
+/* Dark bottom gradient */
+
+.photo-frame::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 58%,
+            rgba(0,0,0,.75)
+        );
+}
+
+
+/* Scan */
+
+.photo-frame::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: -5px;
+
+    height: 2px;
+
+    z-index: 7;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,48,48,.9),
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px rgba(255,48,48,.55);
+
+    animation:
+        scan 4s linear infinite;
+}
+
+
+@keyframes scan {
+
+    0% {
+        top: -5px;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 105%;
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   PHOTO HUD CORNERS
+========================================================= */
+
+.hud-corner {
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    z-index: 8;
+}
+
+
+.hud-corner.tl {
+
+    top: 9px;
+    left: 9px;
+
+    border-top:
+        2px solid #ff3030;
+
+    border-left:
+        2px solid #ff3030;
+}
+
+
+.hud-corner.tr {
+
+    top: 9px;
+    right: 9px;
+
+    border-top:
+        2px solid #fff;
+
+    border-right:
+        2px solid #fff;
+}
+
+
+.hud-corner.bl {
+
+    bottom: 9px;
+    left: 9px;
+
+    border-bottom:
+        2px solid #fff;
+
+    border-left:
+        2px solid #fff;
+}
+
+
+.hud-corner.br {
+
+    bottom: 9px;
+    right: 9px;
+
+    border-bottom:
+        2px solid #ff3030;
+
+    border-right:
+        2px solid #ff3030;
+}
+
+
+/* =========================================================
+   PHOTO INFO
+========================================================= */
+
+.photo-number {
+
+    position: absolute;
+
+    top: 11px;
+    left: 11px;
+
+    z-index: 9;
+
+    padding:
+        4px 7px;
+
+    background:
+        rgba(0,0,0,.6);
+
+    border-left:
+        2px solid #ff3030;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.photo-status {
+
+    position: absolute;
+
+    right: 11px;
+    bottom: 10px;
+
+    z-index: 9;
+
+    font-family: monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+
+    color: #ddd;
+}
+
+
+.photo-status::before {
+
+    content: "";
+
+    display: inline-block;
+
+    width: 5px;
+    height: 5px;
+
+    margin-right: 5px;
+
+    border-radius: 50%;
+
+    background: #35e879;
+
+    box-shadow:
+        0 0 8px #35e879;
+}
+
+
+/* =========================================================
+   PLAYER INFO
+========================================================= */
+
+.player-info {
+
+    padding:
+        12px
+        12px
+        15px;
+}
+
+
+.player-name {
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.player-role {
+
+    margin-top: 5px;
+
+    color: #ff4848;
+
+    font-size: 7px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.4px;
+
+    text-transform: uppercase;
+}
+
+
+.card-arrow {
+
+    position: absolute;
+
+    right: 11px;
+    bottom: 13px;
+
+    color: #555;
+
+    transition:
+        transform .2s ease,
+        color .2s ease;
+}
+
+
+.player-card:hover
+.card-arrow {
+
+    color: #ff3030;
+
+    transform:
+        translateX(4px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    text-align: center;
+
+    padding:
+        25px
+        15px
+        35px;
+
+    color: #444;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+footer strong {
+
+    color: #777;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (min-width: 650px) {
+
+    .player-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+
+    .squad {
+
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+}
+
+
+@media (min-width: 950px) {
+
+    .player-grid {
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<header class="hero">
+
+
+    <!-- TOP HUD -->
+
+    <div class="top-hud">
+
+        <span>
+            STW // SQUAD-026
+        </span>
+
+        <span class="hud-online">
+            ALL SYSTEMS ACTIVE
+        </span>
+
+    </div>
+
+
+    <!-- EMBLEM -->
+
+    <div class="emblem"
+         aria-hidden="true">
+
+        <span>
+            STW
+        </span>
+
+    </div>
+
+
+    <!-- CROSSHAIR -->
+
+    <div class="crosshair"
+         aria-hidden="true">
+    </div>
+
+
+    <!-- TITLE -->
+
+    <h1 class="title">
+
+        <span class="st">
+            ST
+        </span>
+
+        <span class="warriors">
+            WARRIORS
+        </span>
+
+    </h1>
+
+
+    <div class="title-line"
+         aria-hidden="true">
+    </div>
+
+
+    <!-- DIALOGUE -->
+
+    <p class="dialogue">
+
+        Marenge sabko, magar kamzor mile to sahi.
+
+    </p>
+
+
+    <!-- STATUS -->
+
+    <div class="status">
+
+        <span class="status-dot"></span>
+
+        <span>
+            READY // LOCKED // DEPLOYED
+        </span>
+
+    </div>
+
+
+    <!-- LOADING -->
+
+    <div class="loading">
+
+        <div class="loading-track">
+
+            <div class="loading-progress"></div>
+
+        </div>
+
+        <div class="loading-label">
+
+            <span>
+                SQUAD INITIALIZATION
+            </span>
+
+            <span>
+                ONLINE
+            </span>
+
+        </div>
+
+    </div>
+
+
+</header>
+
+
+
+<!-- =======================================================
+     SQUAD
+======================================================= -->
+
+<main class="squad"
+      aria-label="ST Warriors squad members">
+
+
+    <div class="section-heading">
+
+        <h2>
+            THE SQU4DS
+        </h2>
+
+        <small>
+            04 OPERATORS
+        </small>
+
+    </div>
+
+
+    <section class="player-grid"
+             aria-label="Warrior profiles">
+
+
+        <!-- ================= PLAYER 01 ================= -->
+
+        <a class="player-card"
+           href="players/bijay.html"
+           aria-label="Open MC-BIJ4Y profile">
+
+
+            <div class="photo-frame">
+
+                <!-- PASTE YOUR 4:5 PHOTO URL HERE -->
+
+                <img
+                    src="https://imgdb.in/i/gXKq2IB7gI.jpg"
+                    alt="MC-BIJ4Y player photo"
+                    loading="lazy"
+                >
+
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+
+                <span class="photo-number">
+                    #01
+                </span>
+
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    MC-BIJ4Y
+                </div>
+
+                <div class="player-role">
+                    ⚡ RUSHER // ENTRY
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+
+
+
+        <!-- ================= PLAYER 02 ================= -->
+
+        <a class="player-card"
+           href="players/hopon.html"
+           aria-label="Open Player Two profile">
+
+
+            <div class="photo-frame">
+
+                <img
+                    src="https://imgdb.in/i/gXKG4OYdDq.jpg"
+                    alt="Player Two photo"
+                    loading="lazy"
+                >
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+                <span class="photo-number">
+                    #02
+                </span>
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    ST-CHHOTO
+                </div>
+
+                <div class="player-role">
+                    🎯 SNIPER // SCOUT
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+
+
+
+        <!-- ================= PLAYER 03 ================= -->
+
+        <a class="player-card"
+           href="players/hoponkola.html"
+           aria-label="Open Player Three profile">
+
+
+            <div class="photo-frame">
+
+                <img
+                    src="https://imgdb.in/i/gXKCt9ljVu.jpg"
+                    alt="Player Three photo"
+                    loading="lazy"
+                >
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+                <span class="photo-number">
+                    #03
+                </span>
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    ST-HURD4
+                </div>
+
+                <div class="player-role">
+                    🧠 IGL // COMMAND
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+
+
+
+        <!-- ================= PLAYER 04 ================= -->
+
+        <a class="player-card"
+           href="players/marshal.html"
+           aria-label="Open Player Four profile">
+
+
+            <div class="photo-frame">
+
+                <img
+                    src="https://imgdb.in/i/gXKxQtkK9G.jpg"
+                    alt="Player Four photo"
+                    loading="lazy"
+                >
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+                <span class="photo-number">
+                    #04
+                </span>
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    M4-M4RSH4L
+                </div>
+
+                <div class="player-role">
+                    💣 BOMBER // CHAOS
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+
+
+    </section>
+
+</main>
+
+
+
+<footer>
+
+    <strong>
+        ST WARRIORS
+    </strong>
+
+    <br><br>
+
+    SQUAD // 2026
+
+</footer>
+
+
+</body>
+</html>
