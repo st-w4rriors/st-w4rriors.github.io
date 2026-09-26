@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, user-scalable=no">
+
+<meta name="theme-color" content="#08090d">
+
+<title>MC-BIJ4Y // ST WARRIORS</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    color: #fff;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(255, 45, 45, .14),
+            transparent 35%
+        ),
+        #07080b;
+}
+
+
+/* =========================================================
+   BACKGROUND HUD
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size: 34px 34px;
+
+    animation:
+        gridMove 12s linear infinite;
+
+    pointer-events: none;
+
+    z-index: -5;
+}
+
+@keyframes gridMove {
+
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 34px 34px;
+    }
+}
+
+
+/* Scanlines */
+
+body::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 4px,
+            rgba(255,255,255,.012) 5px
+        );
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar {
+
+    width: min(650px, calc(100% - 28px));
+
+    margin: 18px auto 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 9px 12px;
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    background:
+        rgba(10,11,15,.75);
+
+    backdrop-filter: blur(10px);
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    color: #666;
+
+    animation:
+        slideDown .7s ease both;
+}
+
+@keyframes slideDown {
+
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.topbar strong {
+    color: #ff3b3b;
+}
+
+.online {
+    color: #35e879;
+}
+
+.online::before {
+
+    content: "";
+
+    display: inline-block;
+
+    width: 5px;
+    height: 5px;
+
+    margin-right: 5px;
+
+    border-radius: 50%;
+
+    background: #35e879;
+
+    box-shadow:
+        0 0 9px #35e879;
+
+    animation:
+        pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    50% {
+        opacity: .35;
+    }
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main {
+
+    width: min(650px, 100%);
+
+    margin: auto;
+
+    padding:
+        25px
+        18px
+        60px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ROLE INTRO
+========================================================= */
+
+.role-intro {
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+
+    color: #777;
+
+    text-transform: uppercase;
+
+    animation:
+        fadeUp .8s .1s ease both;
+}
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   PLAYER CARD
+========================================================= */
+
+.player-card {
+
+    margin:
+        24px auto 0;
+
+    width: min(430px, 100%);
+
+    position: relative;
+
+    padding: 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3030,
+            #321016 25%,
+            #101218 50%,
+            #321016 75%,
+            #ff3030
+        );
+
+    background-size: 250% 250%;
+
+    animation:
+        borderFlow 5s ease infinite,
+        cardEnter 1s .2s ease both;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.65),
+        0 0 30px rgba(255,48,48,.08);
+}
+
+@keyframes borderFlow {
+
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes cardEnter {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(35px)
+            scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   PHOTO
+   4:5 PORTRAIT
+========================================================= */
+
+.photo {
+
+    width: 100%;
+
+    aspect-ratio: 4 / 5;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1b1d23,
+            #08090d
+        );
+}
+
+
+/* Actual player image */
+
+.photo img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    position: relative;
+
+    z-index: 2;
+
+    opacity: 0;
+
+    animation:
+        photoReveal 1.2s .6s ease forwards;
+
+    transition:
+        transform .7s ease,
+        filter .7s ease;
+}
+
+@keyframes photoReveal {
+
+    from {
+        opacity: 0;
+        transform: scale(1.08);
+        filter:
+            blur(8px)
+            saturate(.4);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter:
+            blur(0)
+            saturate(1);
+    }
+}
+
+.player-card:hover .photo img {
+
+    transform: scale(1.035);
+
+    filter:
+        contrast(1.05)
+        saturate(1.08);
+}
+
+
+/* Dark lower gradient */
+
+.photo::before {
+
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 3;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 52%,
+            rgba(0,0,0,.8)
+        );
+}
+
+
+/* =========================================================
+   PHOTO SCAN
+========================================================= */
+
+.photo::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: -5px;
+
+    height: 3px;
+
+    z-index: 8;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff3030,
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px #ff3030;
+
+    animation:
+        photoScan 3.5s linear infinite;
+}
+
+@keyframes photoScan {
+
+    0% {
+        top: -5px;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 105%;
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   HUD CORNERS
+========================================================= */
+
+.corner {
+
+    position: absolute;
+
+    width: 28px;
+    height: 28px;
+
+    z-index: 9;
+}
+
+.corner.tl {
+
+    top: 13px;
+    left: 13px;
+
+    border-top:
+        2px solid #ff3030;
+
+    border-left:
+        2px solid #ff3030;
+}
+
+.corner.tr {
+
+    top: 13px;
+    right: 13px;
+
+    border-top:
+        2px solid #fff;
+
+    border-right:
+        2px solid #fff;
+}
+
+.corner.bl {
+
+    bottom: 13px;
+    left: 13px;
+
+    border-bottom:
+        2px solid #fff;
+
+    border-left:
+        2px solid #fff;
+}
+
+.corner.br {
+
+    bottom: 13px;
+    right: 13px;
+
+    border-bottom:
+        2px solid #ff3030;
+
+    border-right:
+        2px solid #ff3030;
+}
+
+
+/* =========================================================
+   TARGET / CROSSHAIR
+========================================================= */
+
+.target {
+
+    position: absolute;
+
+    width: 105px;
+    height: 105px;
+
+    left: 50%;
+    top: 45%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border:
+        1px solid rgba(255,255,255,.35);
+
+    border-radius: 50%;
+
+    z-index: 7;
+
+    pointer-events: none;
+
+    animation:
+        targetSpin 12s linear infinite;
+}
+
+.target::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 18px;
+
+    border:
+        1px solid rgba(255,48,48,.65);
+
+    border-radius: 50%;
+}
+
+.target::after {
+
+    content: "+";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #ff3030;
+
+    font-family: monospace;
+
+    font-size: 18px;
+
+    text-shadow:
+        0 0 10px #ff3030;
+}
+
+@keyframes targetSpin {
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   PHOTO LABELS
+========================================================= */
+
+.photo-id {
+
+    position: absolute;
+
+    top: 17px;
+    left: 19px;
+
+    z-index: 10;
+
+    padding:
+        5px 8px;
+
+    background:
+        rgba(0,0,0,.65);
+
+    border-left:
+        2px solid #ff3030;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.photo-status {
+
+    position: absolute;
+
+    right: 18px;
+    bottom: 17px;
+
+    z-index: 10;
+
+    color: #ddd;
+
+    font-family: monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   PLAYER NAME
+========================================================= */
+
+.name {
+
+    margin-top: 28px;
+
+    font-family:
+        Impact,
+        Haettenschweiler,
+        "Arial Narrow Bold",
+        sans-serif;
+
+    font-size:
+        clamp(42px, 12vw, 70px);
+
+    line-height: .85;
+
+    letter-spacing: 1px;
+
+    transform: skewX(-5deg);
+
+    text-transform: uppercase;
+
+    animation:
+        glitchIn 1s .8s ease both;
+}
+
+@keyframes glitchIn {
+
+    0% {
+        opacity: 0;
+        transform:
+            skewX(-5deg)
+            translateX(-18px);
+    }
+
+    55% {
+        opacity: 1;
+        transform:
+            skewX(-5deg)
+            translateX(4px);
+    }
+
+    70% {
+        transform:
+            skewX(-5deg)
+            translateX(-2px);
+    }
+
+    100% {
+        transform:
+            skewX(-5deg)
+            translateX(0);
+    }
+}
+
+.name span:first-child {
+
+    color: #ff3030;
+
+    text-shadow:
+        0 0 20px rgba(255,48,48,.25);
+}
+
+
+/* =========================================================
+   DUAL ROLE
+========================================================= */
+
+.roles {
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+
+.role {
+
+    padding:
+        7px 11px;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    background:
+        rgba(255,255,255,.035);
+
+    animation:
+        badgeIn .7s 1.1s ease both;
+}
+
+@keyframes badgeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.role.sniper {
+
+    color: #7ee8ff;
+
+    border-color:
+        rgba(126,232,255,.35);
+}
+
+.role.rusher {
+
+    color: #ff4545;
+
+    border-color:
+        rgba(255,69,69,.4);
+}
+
+
+/* =========================================================
+   PROFILE PANEL
+========================================================= */
+
+.profile {
+
+    margin-top: 28px;
+
+    padding: 18px;
+
+    text-align: left;
+
+    background:
+        rgba(14,15,20,.82);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    position: relative;
+
+    overflow: hidden;
+
+    animation:
+        fadeUp .8s 1.25s ease both;
+}
+
+
+.profile::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 70px;
+    height: 2px;
+
+    background: #ff3030;
+
+    box-shadow:
+        0 0 12px #ff3030;
+}
+
+
+.profile-title {
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #666;
+
+    margin-bottom: 15px;
+}
+
+
+.profile-text {
+
+    color: #ccc;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats {
+
+    margin-top: 18px;
+
+    display: grid;
+
+    gap: 13px;
+}
+
+
+.stat {
+
+    font-family: monospace;
+}
+
+
+.stat-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 5px;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    color: #777;
+}
+
+
+.stat-value {
+
+    color: #fff;
+}
+
+
+.stat-bar {
+
+    height: 4px;
+
+    background: #1c1e24;
+
+    overflow: hidden;
+}
+
+
+.stat-fill {
+
+    height: 100%;
+
+    width: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3030,
+            #ff7777
+        );
+
+    box-shadow:
+        0 0 9px rgba(255,48,48,.45);
+
+    animation:
+        statLoad 1.4s 1.5s ease forwards;
+}
+
+
+.precision {
+    --value: 92%;
+}
+
+.aggression {
+    --value: 88%;
+}
+
+.range {
+    --value: 95%;
+}
+
+.mobility {
+    --value: 90%;
+}
+
+
+@keyframes statLoad {
+
+    to {
+        width: var(--value);
+    }
+}
+
+
+/* =========================================================
+   HYBRID STYLE
+========================================================= */
+
+.hybrid {
+
+    margin-top: 18px;
+
+    padding: 13px;
+
+    border-left:
+        3px solid #ff3030;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,48,48,.08),
+            transparent
+        );
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    color: #aaa;
+
+    animation:
+        fadeUp .8s 1.45s ease both;
+}
+
+
+.hybrid strong {
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 28px;
+
+    padding:
+        12px 18px;
+
+    color: #ddd;
+
+    text-decoration: none;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+
+.back:hover {
+
+    background:
+        rgba(255,48,48,.08);
+
+    border-color:
+        rgba(255,48,48,.5);
+
+    transform:
+        translateX(-3px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    padding:
+        25px 15px 35px;
+
+    text-align: center;
+
+    color: #444;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+footer strong {
+
+    color: #777;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 700px) {
+
+    main {
+        padding-top: 40px;
+    }
+
+    .player-card {
+        width: 430px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+}
+/* =========================================================
+   ST WARRIORS SIGNATURE
+   ========================================================= */
+
+.stw-signature {
+    width: min(650px, calc(100% - 28px));
+    margin: 14px auto 0;
+    padding: 16px 10px 12px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: signatureIn .9s ease both;
+}
+
+.stw-signature::before,
+.stw-signature::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 24%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,48,48,.8)
+    );
+    box-shadow: 0 0 10px rgba(255,48,48,.35);
+}
+
+.stw-signature::before {
+    left: 0;
+}
+
+.stw-signature::after {
+    right: 0;
+    transform: rotate(180deg);
+}
+
+.stw-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: #777;
+    font-family: monospace;
+    font-size: 7px;
+    letter-spacing: 4px;
+}
+
+.stw-brand {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 7px;
+
+    font-family:
+        Impact,
+        Haettenschweiler,
+        "Arial Narrow Bold",
+        sans-serif;
+
+    font-size: clamp(30px, 9vw, 48px);
+    line-height: .9;
+    letter-spacing: 2px;
+
+    font-style: italic;
+    text-transform: uppercase;
+
+    transform: skewX(-7deg);
+
+    text-shadow:
+        0 0 18px rgba(255,48,48,.12),
+        3px 3px 0 rgba(255,48,48,.08);
+}
+
+.stw-st {
+    color: #ff3030;
+}
+
+.stw-warriors {
+    color: #f4f4f4;
+}
+
+.stw-line {
+    width: 115px;
+    height: 2px;
+
+    margin: 10px auto 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff3030,
+            #fff,
+            #ff3030,
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px rgba(255,48,48,.5);
+
+    animation:
+        signatureLine 2.4s ease-in-out infinite;
+}
+
+.stw-code {
+    margin-top: 7px;
+
+    color: #555;
+
+    font-family: monospace;
+    font-size: 6px;
+    letter-spacing: 3px;
+}
+
+@keyframes signatureIn {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(-18px)
+            scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes signatureLine {
+
+    0%, 100% {
+        transform: scaleX(.65);
+        opacity: .55;
+    }
+
+    50% {
+        transform: scaleX(1.15);
+        opacity: 1;
+    }
+}
+
+
+/* Moving light across logo */
+
+.signature-scan {
+
+    position: absolute;
+
+    top: 0;
+    left: -25%;
+
+    width: 20%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.08),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    animation:
+        signatureScan 4.5s linear infinite;
+
+    pointer-events: none;
+}
+
+@keyframes signatureScan {
+
+    from {
+        left: -25%;
+    }
+
+    to {
+        left: 125%;
+    }
+}
+
+
+/* =========================================================
+   OPERATOR IDENTITY STRIP
+   ========================================================= */
+
+.identity-strip {
+
+    width: min(430px, 100%);
+
+    margin: 18px auto 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #666;
+
+    font-family: monospace;
+    font-size: 7px;
+    letter-spacing: 1.8px;
+
+    animation:
+        fadeUp .8s .18s ease both;
+}
+
+.identity-strip .dot {
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #ff3030;
+
+    box-shadow:
+        0 0 8px #ff3030;
+
+    animation:
+        pulse 1.5s infinite;
+}
+
+
+/* =========================================================
+   CARD SIGNATURE ACCENT
+   ========================================================= */
+
+.player-card::before {
+
+    content: "STW // LOCKED";
+
+    position: absolute;
+
+    top: -18px;
+    right: 10px;
+
+    z-index: 12;
+
+    padding: 5px 8px;
+
+    color: #ff5555;
+
+    background: #090a0e;
+
+    border:
+        1px solid rgba(255,48,48,.35);
+
+    font-family: monospace;
+
+    font-size: 6px;
+    letter-spacing: 1.5px;
+
+    box-shadow:
+        0 0 14px rgba(255,48,48,.08);
+}
+
+.player-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 18px;
+    bottom: -5px;
+
+    width: 60px;
+    height: 2px;
+
+    background: #ff3030;
+
+    box-shadow:
+        0 0 12px #ff3030;
+
+    animation:
+        cardAccent 2s ease-in-out infinite;
+}
+
+@keyframes cardAccent {
+
+    0%, 100% {
+        width: 45px;
+        opacity: .5;
+    }
+
+    50% {
+        width: 110px;
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+    .stw-signature {
+        padding-top: 13px;
+    }
+
+    .stw-brand {
+        font-size: clamp(
+            28px,
+            10vw,
+            40px
+        );
+    }
+
+    .identity-strip {
+        flex-wrap: wrap;
+        line-height: 1.7;
+        gap: 6px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+<!-- =======================================================
+     ST WARRIORS SIGNATURE
+     ======================================================= -->
+
+<section class="stw-signature" aria-label="ST WARRIORS">
+
+    <span class="stw-kicker">
+        ESTABLISHED // SQUAD IDENTITY
+    </span>
+
+    <div class="stw-brand">
+
+        <span class="stw-st">
+            ST
+        </span>
+
+        <span class="stw-warriors">
+            WARRIORS
+        </span>
+
+    </div>
+
+    <div class="stw-line"></div>
+
+    <div class="stw-code">
+        SQUAD DATABASE // ACTIVE
+    </div>
+
+    <span
+        class="signature-scan"
+        aria-hidden="true">
+    </span>
+
+</section>
+
+
+<!-- =======================================================
+     TOP BAR
+======================================================= -->
+
+<header class="topbar">
+
+    <span>
+        <strong>STW</strong>
+        // WARRIOR PROFILE
+    </span>
+
+    <span class="online">
+        ONLINE
+    </span>
+
+</header>
+
+
+
+<main>
+
+
+    <div class="role-intro">
+    PRECISION // AGGRESSION // CONTROL
+</div>
+
+<div class="identity-strip">
+
+    <span>
+        OPERATOR 01
+    </span>
+
+    <span class="dot"></span>
+
+    <span>
+        SNIPER // RUSHER
+    </span>
+
+    <span class="dot"></span>
+
+    <span>
+        ACTIVE
+    </span>
+
+</div>
+
+
+    <!-- ===================================================
+         PLAYER CARD
+    ==================================================== -->
+
+    <section class="player-card"
+             aria-label="MC-BIJ4Y player profile">
+
+
+        <div class="photo">
+
+
+            <!-- ===========================================
+                 REPLACE THIS WITH YOUR IMAGE URL
+            ============================================ -->
+
+            <img
+                src="https://imgdb.in/i/gXKxQtkK9G.jpg"
+                alt="MC-BIJ4Y player photo"
+            >
+
+
+            <span class="corner tl"></span>
+            <span class="corner tr"></span>
+            <span class="corner bl"></span>
+            <span class="corner br"></span>
+
+
+            <span class="photo-id">
+                OPERATOR // 04
+            </span>
+
+
+            <span class="photo-status">
+                ● LIVE
+            </span>
+
+
+            <div class="target"
+                 aria-hidden="true">
+            </div>
+
+
+        </div>
+
+
+        <!-- PLAYER NAME -->
+
+        <h1 class="name">
+
+            <span>M4</span>-M4RSH4L
+
+        </h1>
+
+
+        <!-- DUAL ROLES -->
+
+        <div class="roles">
+
+            <div class="role sniper">
+                ☢️ IGL
+            </div>
+
+            <div class="role rusher">
+                ⚡ RUSHER
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <div class="profile">
+
+
+            <div class="profile-title">
+                // PLAYER PROFILE
+            </div>
+
+
+            <p class="profile-text">
+
+                A chaos specialist who controls enemy movement with explosive pressure, turning crowded positions and defensive setups into opportunities.
+
+            </p>
+
+
+            <div class="stats">
+
+
+                <div class="stat">
+
+                    <div class="stat-top">
+
+                        <span>
+                            PRECISION
+                        </span>
+
+                        <span class="stat-value">
+                            92
+                        </span>
+
+                    </div>
+
+                    <div class="stat-bar">
+                        <div class="stat-fill precision"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-top">
+
+                        <span>
+                            AGGRESSION
+                        </span>
+
+                        <span class="stat-value">
+                            88
+                        </span>
+
+                    </div>
+
+                    <div class="stat-bar">
+                        <div class="stat-fill aggression"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-top">
+
+                        <span>
+                            LONG RANGE
+                        </span>
+
+                        <span class="stat-value">
+                            95
+                        </span>
+
+                    </div>
+
+                    <div class="stat-bar">
+                        <div class="stat-fill range"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-top">
+
+                        <span>
+                            MOBILITY
+                        </span>
+
+                        <span class="stat-value">
+                            90
+                        </span>
+
+                    </div>
+
+                    <div class="stat-bar">
+                        <div class="stat-fill mobility"></div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="hybrid">
+
+                <strong>HYBRID STYLE</strong><br>
+
+                Create the opening. Control the space. Let the chaos begin.
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- BACK -->
+
+    <a class="back"
+       href="../index.html">
+
+        ← BACK TO ST WARRIORS
+
+    </a>
+
+
+</main>
+
+
+
+<footer>
+
+    <strong>
+        © 2026 ST WARRIORS
+    </strong>
+
+    <br><br>
+
+    ALL RIGHTS RESERVED
+
+</footer>
+<audio id="clickSound" preload="auto">
+    <source src="sniper.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const playerCard = document.querySelector('.player-card');
+const clickSound = document.getElementById('clickSound');
+
+playerCard.addEventListener('click', () => {
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {});
+});
+</script>
+
+
+</body>
+</html>
