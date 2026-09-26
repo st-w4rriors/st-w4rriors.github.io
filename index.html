@@ -1612,6 +1612,25 @@ footer strong {
     SQUAD // 2026
 
 </footer>
+      <audio id="bgMusic" loop preload="auto">
+    <source src="index.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const bgMusic = document.getElementById("bgMusic");
+
+function startMusic() {
+    bgMusic.play()
+        .then(() => {
+            document.removeEventListener("pointerdown", startMusic);
+        })
+        .catch(() => {
+            // Keep listener active if playback fails
+        });
+}
+
+document.addEventListener("pointerdown", startMusic);
+</script>
 
 
 </body>
