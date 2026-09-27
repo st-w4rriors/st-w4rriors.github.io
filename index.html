@@ -377,6 +377,80 @@ body::after {
 
 
 /* =========================================================
+   ST WARRIORS MAIN SIGNATURE
+========================================================= */
+
+.stw-main-signature {
+    width: min(900px, calc(100% - 30px));
+    margin: 25px auto 0;
+    text-align: left;
+    position: relative;
+    z-index: 5;
+    animation: signatureDrop .8s ease both;
+}
+
+.stw-main-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: .82;
+    text-transform: uppercase;
+    transform: skewX(-5deg);
+    user-select: none;
+    filter: drop-shadow(0 12px 25px rgba(0,0,0,.7));
+}
+
+.main-st {
+    color: #ff3030;
+    font-size: clamp(68px, 17vw, 140px);
+    text-shadow: 3px 3px 0 #650d0d, 0 0 30px rgba(255,48,48,.28);
+}
+
+.main-warriors {
+    color: #f2f2f2;
+    font-size: clamp(38px, 8.5vw, 76px);
+    text-shadow: 3px 3px 0 #4b4b4b, 0 0 25px rgba(255,255,255,.1);
+}
+
+.stw-main-line {
+    width: min(540px, 78%);
+    height: 3px;
+    margin-top: 14px;
+    background: linear-gradient(90deg, #ff3030, rgba(255,48,48,.35), transparent);
+    transform: skewX(-20deg);
+    box-shadow: 0 0 14px rgba(255,48,48,.4);
+}
+
+.stw-main-sub {
+    margin-top: 8px;
+    color: #666;
+    font-family: monospace;
+    font-size: 8px;
+    letter-spacing: 3px;
+}
+
+@keyframes signatureDrop {
+    from { opacity: 0; transform: translateX(-25px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 430px) {
+    .stw-main-signature {
+        width: calc(100% - 24px);
+        margin-top: 20px;
+    }
+    .stw-main-brand { gap: 7px; }
+    .main-st { font-size: 64px; }
+    .main-warriors { font-size: 36px; }
+    .stw-main-line { width: 86%; }
+}
+
+
+/* =========================================================
    TITLE
 ========================================================= */
 
@@ -722,14 +796,19 @@ body::after {
 
 
 .section-heading small {
-
     margin-left: auto;
 
-    color: #555;
-
+    color: #ff3030;
     font-size: 8px;
-
     letter-spacing: 2px;
+
+    padding: 5px 9px;
+    border: 1px solid #ff3030;
+    border-radius: 3px;
+
+    display: inline-block;
+    background: rgba(255, 48, 48, 0.06);
+    box-shadow: 0 0 8px rgba(255, 48, 48, 0.15);
 }
 
 
@@ -1114,7 +1193,7 @@ body::after {
 
     margin-top: 5px;
 
-    color: #ff4848;
+    color: #ffffff;
 
     font-size: 7px;
 
@@ -1235,11 +1314,750 @@ footer strong {
     }
 }
 
+/* =========================================
+   ST WARRIORS // WELCOME SYSTEM
+========================================= */
+
+.welcome-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.84);
+    backdrop-filter: blur(8px);
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity .45s ease,
+        visibility .45s ease;
+}
+
+.welcome-overlay.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* MAIN BOX */
+
+.welcome-box {
+    position: relative;
+
+    width: min(390px, 100%);
+    padding: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24, 24, 24, .98),
+            rgba(5, 5, 5, .98)
+        );
+
+    border: 1px solid #ff3030;
+
+    box-shadow:
+        0 0 10px rgba(255, 48, 48, .35),
+        0 0 35px rgba(255, 48, 48, .14);
+
+    overflow: hidden;
+
+    animation: welcomeAppear .55s ease;
+}
+
+
+/* OPEN ANIMATION */
+
+@keyframes welcomeAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            scale(.90)
+            translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+
+/* SCANLINE */
+
+.welcome-box::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: -10%;
+
+    width: 100%;
+    height: 2px;
+
+    background: #ff3030;
+
+    box-shadow:
+        0 0 8px #ff3030,
+        0 0 18px #ff3030;
+
+    opacity: .35;
+
+    pointer-events: none;
+
+    animation: welcomeScan 3s linear infinite;
+}
+
+@keyframes welcomeScan {
+
+    0% {
+        top: -10%;
+    }
+
+    100% {
+        top: 110%;
+    }
+
+}
+
+
+/* TOP BAR */
+
+.welcome-top {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #ff3030;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.welcome-top span:last-child {
+    color: #777;
+}
+
+
+/* RED SEPARATOR */
+
+.welcome-line {
+
+    width: 100%;
+    height: 1px;
+
+    margin: 14px 0 22px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3030,
+            rgba(255,48,48,.15),
+            transparent
+        );
+}
+
+
+/* =========================================
+   STW EMBLEM
+========================================= */
+
+.welcome-emblem {
+
+    position: relative;
+
+    width: 80px;
+    height: 80px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-emblem span {
+
+    position: relative;
+
+    z-index: 3;
+
+    color: #fff;
+
+    font-size: 17px;
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 8px #ff3030;
+}
+
+
+/* ROTATING RING */
+
+.emblem-ring {
+
+    position: absolute;
+
+    inset: 4px;
+
+    border: 1px solid #ff3030;
+
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px rgba(255,48,48,.5);
+
+    animation:
+        emblemRotate 4s linear infinite;
+}
+
+@keyframes emblemRotate {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* CROSSHAIR */
+
+.emblem-cross {
+
+    position: absolute;
+
+    width: 100%;
+    height: 1px;
+
+    background: rgba(255,48,48,.7);
+
+    box-shadow:
+        0 0 8px #ff3030;
+}
+
+.emblem-cross::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: -40px;
+
+    width: 1px;
+    height: 80px;
+
+    background: rgba(255,48,48,.7);
+
+    box-shadow:
+        0 0 8px #ff3030;
+
+}
+
+
+/* CONTENT */
+
+.welcome-content {
+    text-align: center;
+}
+
+.welcome-status {
+
+    margin-bottom: 10px;
+
+    color: #777;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+.welcome-content h1 {
+
+    margin: 0;
+
+    color: #fff;
+
+    font-size: clamp(25px, 8vw, 35px);
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 8px rgba(255,48,48,.35);
+}
+
+.welcome-content p {
+
+    margin: 13px 0 20px;
+
+    color: #888;
+
+    font-size: 10px;
+
+    line-height: 1.7;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   SYSTEM DATA
+========================================= */
+
+.welcome-data {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-bottom: 20px;
+}
+
+.welcome-data div {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 7px 9px;
+
+    background: rgba(255,48,48,.035);
+
+    border-left: 2px solid #ff3030;
+}
+
+.welcome-data span {
+
+    color: #666;
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+}
+
+.welcome-data strong {
+
+    color: #ff3030;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   ENTER BUTTON
+========================================= */
+
+#enterWarriors {
+
+    position: relative;
+
+    width: 100%;
+
+    padding: 13px 20px;
+
+    overflow: hidden;
+
+    color: #fff;
+
+    background:
+        rgba(255,48,48,.06);
+
+    border: 1px solid #ff3030;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+}
+
+
+/* BUTTON SCAN */
+
+#enterWarriors::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 55%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.25),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    animation:
+        buttonScan 2.5s infinite;
+}
+
+@keyframes buttonScan {
+
+    0% {
+        left: -100%;
+    }
+
+    55% {
+        left: 140%;
+    }
+
+    100% {
+        left: 140%;
+    }
+
+}
+
+
+#enterWarriors:hover {
+
+    background: #ff3030;
+
+    box-shadow:
+        0 0 12px #ff3030,
+        0 0 30px rgba(255,48,48,.4);
+
+    transform: translateY(-2px);
+}
+
+#enterWarriors:active {
+
+    transform: scale(.97);
+}
+
+
+/* FOOTER */
+
+.welcome-footer {
+
+    margin-top: 17px;
+
+    text-align: center;
+
+    color: #444;
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 430px) {
+
+    .welcome-box {
+        padding: 18px;
+    }
+
+    .welcome-content h1 {
+        font-size: 25px;
+    }
+
+    .welcome-emblem {
+        width: 70px;
+        height: 70px;
+    }
+    /* =========================================================
+   CREATOR CREDIT // MC-BIJ4Y
+========================================================= */
+
+.creator-credit {
+    width: min(600px, calc(100% - 36px));
+    margin: 10px auto 28px;
+    padding: 22px 14px 18px;
+    text-align: center;
+    position: relative;
+
+    border: 1px solid rgba(255, 48, 48, .22);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 48, 48, .07),
+            transparent 55%
+        );
+
+    box-shadow:
+        0 0 18px rgba(255, 48, 48, .05),
+        inset 0 0 20px rgba(255, 48, 48, .025);
+
+    overflow: hidden;
+}
+
+/* Small HUD corners */
+
+.creator-credit::before,
+.creator-credit::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+}
+
+.creator-credit::before {
+    top: 5px;
+    left: 5px;
+    border-top: 2px solid #ff3030;
+    border-left: 2px solid #ff3030;
+}
+
+.creator-credit::after {
+    right: 5px;
+    bottom: 5px;
+    border-right: 2px solid #ff3030;
+    border-bottom: 2px solid #ff3030;
+}
+
+/* Horizontal lines */
+
+.creator-line {
+    width: 75%;
+    height: 1px;
+    margin: 0 auto 16px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff3030,
+            transparent
+        );
+
+    box-shadow: 0 0 8px rgba(255, 48, 48, .5);
+}
+
+.creator-line:last-child {
+    margin: 16px auto 0;
+}
+
+/* Label */
+
+.creator-label {
+    color: #ff3030;
+    font-family: monospace;
+    font-size: 8px;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+/* Main title */
+
+.creator-title {
+    color: #777;
+    font-family: monospace;
+    font-size: 15px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+/* Clickable creator name */
+
+.creator-name {
+    display: inline-block;
+
+    color: #fff;
+    font-family: monospace;
+    font-size: clamp(27px, 7vw, 42px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-decoration: none;
+
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, .35);
+
+    transition:
+        color .2s ease,
+        text-shadow .2s ease,
+        transform .2s ease;
+}
+
+.creator-name span {
+    color: #ff3030;
+
+    text-shadow:
+        0 0 8px rgba(255, 48, 48, .7),
+        0 0 20px rgba(255, 48, 48, .25);
+}
+
+.creator-name small {
+    color: #ff3030;
+    font-size: 15px;
+    vertical-align: top;
+    margin-left: 5px;
+}
+
+.creator-name:hover {
+    color: #ff3030;
+    text-shadow:
+        0 0 8px rgba(255, 48, 48, .8),
+        0 0 22px rgba(255, 48, 48, .4);
+
+    transform: translateY(-2px);
+}
+
+.creator-name:hover span {
+    color: #fff;
+}
+
+/* Creator role */
+
+.creator-role {
+    margin-top: 10px;
+
+    color: #666;
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+/* Status */
+
+.creator-status {
+    margin-top: 15px;
+
+    color: #ffffff;
+    font-family: monospace;
+    font-size: 50px;
+    letter-spacing: 2px;
+}
+
+.creator-status span {
+    color: #ff3030;
+    text-shadow: 0 0 8px #ff3030;
+}
+
+/* Mobile adjustment */
+
+@media (max-width: 430px) {
+
+    .creator-credit {
+        padding: 20px 10px 16px;
+    }
+
+    .creator-role {
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .creator-status {
+        font-size: 7px;
+    }
+
+}
+
+
+
+
 </style>
 </head>
 
 
 <body>
+
+<!-- =======================================================
+     ST WARRIORS WELCOME DIALOG
+======================================================= -->
+
+<div id="welcomeDialog" class="welcome-overlay">
+
+    <div class="welcome-box">
+
+        <div class="welcome-top">
+            <span>ST WARRIORS // SYSTEM</span>
+            <span>ONLINE</span>
+        </div>
+
+        <div class="welcome-line"></div>
+
+        <div class="welcome-emblem" aria-hidden="true">
+            <div class="emblem-ring"></div>
+            <div class="emblem-cross"></div>
+            <span>STW</span>
+        </div>
+
+        <div class="welcome-content">
+            <div class="welcome-status">● CONNECTION ESTABLISHED</div>
+
+            <h1>WELCOME, OPERATOR</h1>
+
+            <p>
+                Squad roster initialized.<br>
+                Enter the ST WARRIORS zone.
+            </p>
+
+            <div class="welcome-data">
+                <div>
+                    <span>OPERATOR ACCESS</span>
+                    <strong>GRANTED</strong>
+                </div>
+                <div>
+                    <span>SQUAD STATUS</span>
+                    <strong>ACTIVE</strong>
+                </div>
+                <div>
+                    <span>MISSION STATUS</span>
+                    <strong>READY</strong>
+                </div>
+            </div>
+
+            <button id="enterWarriors" type="button">
+                <span>ENTER THE ZONE</span>
+            </button>
+        </div>
+
+        <div class="welcome-footer">STW // SECURE ACCESS</div>
+
+    </div>
+
+</div>
+    
+    
 
 
 <!-- =======================================================
@@ -1283,19 +2101,22 @@ footer strong {
     </div>
 
 
-    <!-- TITLE -->
+    <!-- ST WARRIORS SIGNATURE -->
 
-    <h1 class="title">
+    <div class="stw-main-signature" aria-label="ST WARRIORS">
 
-        <span class="st">
-            ST
-        </span>
+        <h1 class="stw-main-brand">
+            <span class="main-st">ST</span>
+            <span class="main-warriors">WARRIORS</span>
+        </h1>
 
-        <span class="warriors">
-            WARRIORS
-        </span>
+        <div class="stw-main-line" aria-hidden="true"></div>
 
-    </h1>
+        <div class="stw-main-sub">
+            SQUAD // IDENTITY // ACTIVE
+        </div>
+
+    </div>
 
 
     <div class="title-line"
@@ -1365,7 +2186,7 @@ footer strong {
     <div class="section-heading">
 
         <h2>
-            THE SQU4DS
+            THE - <font color="#ff3030">COMM4NDER</font>
         </h2>
 
         <small>
@@ -1418,11 +2239,11 @@ footer strong {
             <div class="player-info">
 
                 <div class="player-name">
-                    MC-BIJ4Y
+                    B4-<font color="#ff3030">BIJ4Y</font>
                 </div>
 
                 <div class="player-role">
-                    ⚡ RUSHER // ENTRY
+                    ⚡ CONTROL // COMMANDER 🏳️
                 </div>
 
             </div>
@@ -1440,14 +2261,14 @@ footer strong {
         <!-- ================= PLAYER 02 ================= -->
 
         <a class="player-card"
-           href="players/hopon.html"
+           href="players/hoponkola.html"
            aria-label="Open Player Two profile">
 
 
             <div class="photo-frame">
 
                 <img
-                    src="https://imgdb.in/i/gXKG4OYdDq.jpg"
+                    src="https://imgdb.in/i/gXKCt9ljVu.jpg"
                     alt="Player Two photo"
                     loading="lazy"
                 >
@@ -1471,11 +2292,11 @@ footer strong {
             <div class="player-info">
 
                 <div class="player-name">
-                    ST-CHHOTO
+                    ST-<font color="#ff3030">HURD4</font>
                 </div>
 
                 <div class="player-role">
-                    🎯 SNIPER // SCOUT
+                    ⚡ CONTROL // COMMANDER 🏳️
                 </div>
 
             </div>
@@ -1493,14 +2314,14 @@ footer strong {
         <!-- ================= PLAYER 03 ================= -->
 
         <a class="player-card"
-           href="players/hoponkola.html"
+           href="players/hoponkola.htmll"
            aria-label="Open Player Three profile">
 
 
             <div class="photo-frame">
 
                 <img
-                    src="https://imgdb.in/i/gXKCt9ljVu.jpg"
+                    src="ff.gif"
                     alt="Player Three photo"
                     loading="lazy"
                 >
@@ -1524,11 +2345,11 @@ footer strong {
             <div class="player-info">
 
                 <div class="player-name">
-                    ST-HURD4
+                    <font color="#ff3030">NEGETIVE </font>
                 </div>
 
                 <div class="player-role">
-                    🧠 IGL // COMMAND
+                   ⚡ CONTROL // COMMANDER 🏳️
                 </div>
 
             </div>
@@ -1546,14 +2367,14 @@ footer strong {
         <!-- ================= PLAYER 04 ================= -->
 
         <a class="player-card"
-           href="players/marshal.html"
+           href="players/marshal.htmll"
            aria-label="Open Player Four profile">
 
 
             <div class="photo-frame">
 
                 <img
-                    src="https://imgdb.in/i/gXKxQtkK9G.jpg"
+                    src="ff.gif"
                     alt="Player Four photo"
                     loading="lazy"
                 >
@@ -1577,11 +2398,11 @@ footer strong {
             <div class="player-info">
 
                 <div class="player-name">
-                    M4-M4RSH4L
+                    <font color="#ff3030">NEGETIVE</font>
                 </div>
 
                 <div class="player-role">
-                    💣 BOMBER // CHAOS
+                    ⚡ CONTROL // COMMANDER 🏳️
                 </div>
 
             </div>
@@ -1598,7 +2419,530 @@ footer strong {
     </section>
 
 </main>
+<main class="squad"
+      aria-label="ST Warriors squad members">
 
+
+    <div class="section-heading">
+
+        <h2>
+            THE - <font color="#ff44ff">SCOUTS ☣</font>
+        </h2>
+
+        <small>
+            04 OPERATORS
+        </small>
+
+    </div>
+
+
+    <section class="player-grid"
+             aria-label="Warrior profiles">
+
+
+        <!-- ================= PLAYER 01 ================= -->
+
+        <a class="player-card"
+           href="players/prodeep.html"
+           aria-label="Open MC-BIJ4Y profile">
+
+
+            <div class="photo-frame">
+
+                <!-- PASTE YOUR 4:5 PHOTO URL HERE -->
+
+                <img
+                    src="https://imgdb.in/i/gXKKEO4EVi.jpg"
+                    alt="MC-BIJ4Y player photo"
+                    loading="lazy"
+                >
+
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+
+                <span class="photo-number">
+                    #01
+                </span>
+
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    RG - <font color="#ff44ff">PR4DEEP</font>
+                        
+                    
+                </div>
+
+                <div class="player-role">
+                    ⚡ RUSHER // CLOSE RANGE ⚠️
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+                <!-- ================= PLAYER 02 ================= -->
+         <a class="player-card"
+           href="players/marshal.html"
+           aria-label="Open MC-BIJ4Y profile">
+
+
+            <div class="photo-frame">
+
+                <!-- PASTE YOUR 4:5 PHOTO URL HERE -->
+
+                <img
+                    src="https://imgdb.in/i/gXKxQtkK9G.jpg"
+                    alt="MC-BIJ4Y player photo"
+                    loading="lazy"
+                >
+
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+
+                <span class="photo-number">
+                    #02
+                </span>
+
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    M4 - <font color="#ff44ff">M4RSH4L</font>
+                        
+                    
+                </div>
+
+                <div class="player-role">
+                    ⚡ RUSHER // CLOSE RANGE ⚠️
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+                <!-- ================= PLAYER 03 ================= -->
+          <a class="player-card"
+           href="players/prodeep.htmll"
+           aria-label="Open MC-BIJ4Y profile">
+
+
+            <div class="photo-frame">
+
+                <!-- PASTE YOUR 4:5 PHOTO URL HERE -->
+
+                <img
+                    src="ff.gif"
+                    alt="MC-BIJ4Y player photo"
+                    loading="lazy"
+                >
+
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+
+                <span class="photo-number">
+                    #03
+                </span>
+
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    NA - <font color="#ff44ff">NEGETIVE</font>
+                        
+                    
+                </div>
+
+                <div class="player-role">
+                    ⚡ RUSHER // CLOSE RANGE ⚠️
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+                <!-- ================= PLAYER 04 ================= -->
+          <a class="player-card"
+           href="players/prodeep.html"
+           aria-label="Open MC-BIJ4Y profile">
+
+
+            <div class="photo-frame">
+
+                <!-- PASTE YOUR 4:5 PHOTO URL HERE -->
+
+                <img
+                    src="ff.gif"
+                    alt="MC-BIJ4Y player photo"
+                    loading="lazy"
+                >
+
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+
+                <span class="photo-number">
+                    #04
+                </span>
+
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    NA - <font color="#ff44ff">NEGETIVE</font>
+                        
+                    
+                </div>
+
+                <div class="player-role">
+                    ⚡ RUSHER // CLOSE RANGE ⚠️
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+        
+    </section>
+    
+</main>
+        <!-- ================= SNIPER ================= -->
+    
+<main class="squad"
+      aria-label="ST Warriors squad members">
+
+
+    <div class="section-heading">
+
+        <h2>
+            THE - <font color="#1E90FF">SNIPER</font>
+        </h2>
+
+        <small>
+            04 OPERATORS
+        </small>
+
+    </div>
+
+
+    <section class="player-grid"
+             aria-label="Warrior profiles">
+
+
+        <!-- ================= PLAYER 01 ================= -->
+
+        <a class="player-card"
+           href="players/hopon.html"
+           aria-label="Open MC-BIJ4Y profile">
+
+
+            <div class="photo-frame">
+
+                <!-- PASTE YOUR 4:5 PHOTO URL HERE -->
+
+                <img
+                    src="https://imgdb.in/i/gXKG4OYdDq.jpg"
+                    alt="MC-BIJ4Y player photo"
+                    loading="lazy"
+                >
+
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+
+                <span class="photo-number">
+                    #01
+                </span>
+
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    MC -<font color="#1E90FF">CHHOTO</font> 
+                </div>
+
+                <div class="player-role">
+                    ⚡ SNIPER // PRECISION 👀
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+                <!-- ================= PLAYER 02 ================= -->
+        <a class="player-card"
+           href="players/hopon.htmll"
+           aria-label="Open Player Two profile">
+
+
+            <div class="photo-frame">
+
+                <img
+                    src="ff.gif"
+                    alt="Player Two photo"
+                    loading="lazy"
+                >
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+                <span class="photo-number">
+                    #02
+                </span>
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    <font color="#1E90FF">NEGETIVE</font> 
+                </div>
+
+                <div class="player-role">
+                    ⚡ SNIPER // PRECISION 👀
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+                <!-- ================= PLAYER 03 ================= -->
+        <a class="player-card"
+           href="players/bijay.htmll"
+           aria-label="Open MC-BIJ4Y profile">
+
+
+            <div class="photo-frame">
+
+                <!-- PASTE YOUR 4:5 PHOTO URL HERE -->
+
+                <img
+                    src="ff.gif"
+                    alt="MC-BIJ4Y player photo"
+                    loading="lazy"
+                >
+
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+
+                <span class="photo-number">
+                    #03
+                </span>
+
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                    <font color="#1E90FF">NEGETIVE</font> 
+                </div>
+
+                <div class="player-role">
+                   ⚡ SNIPER // PRECISION 👀
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+                <!-- ================= PLAYER 04 ================= -->
+        <a class="player-card"
+           href="players/bijay.htmll"
+           aria-label="Open MC-BIJ4Y profile">
+
+
+            <div class="photo-frame">
+
+                <!-- PASTE YOUR 4:5 PHOTO URL HERE -->
+
+                <img
+                    src="ff.gif"
+                    alt="MC-BIJ4Y player photo"
+                    loading="lazy"
+                >
+
+
+                <span class="hud-corner tl"></span>
+                <span class="hud-corner tr"></span>
+                <span class="hud-corner bl"></span>
+                <span class="hud-corner br"></span>
+
+
+                <span class="photo-number">
+                    #04
+                </span>
+
+
+                <span class="photo-status">
+                    ACTIVE
+                </span>
+
+            </div>
+
+
+            <div class="player-info">
+
+                <div class="player-name">
+                   <font color="#1E90FF">NEGETIVE</font>
+                </div>
+
+                <div class="player-role">
+                    ⚡ SNIPER // PRECISION 👀
+                </div>
+
+            </div>
+
+
+            <span class="card-arrow"
+                  aria-hidden="true">
+                →
+            </span>
+
+        </a>
+        
+    </section>
+    
+</main>
+<!-- CREATOR CREDIT -->
+<section class="creator-credit">
+
+    <div class="creator-line"></div>
+
+    <div class="creator-label">
+        // SYSTEM ARCHITECT
+    </div>
+
+    <div class="creator-title">
+        DESIGNED & DEVELOPED BY
+    </div>
+
+    <a
+        class="creator-name"
+        href="https://www.instagram.com/_bhak__bsdk"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visit MC-BIJ4Y creator profile"
+    >
+        <span>MC-</span>BIJ4Y
+        <small>↗</small>
+    </a>
+
+    <div class="creator-role">
+        ST WARRIORS // CREATOR // OPERATOR
+    </div>
+
+    <div class="creator-status">
+        <span>●</span> CONTACT ME FOR MORE 
+    </div>
+
+    <div class="creator-line"></div>
+
+</section>
 
 
 <footer>
@@ -1678,7 +3022,7 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 </script>
-      <script>
+<script>
 document.addEventListener("pointerdown", function(event) {
 
     const flowers = ["💥", "💥", "💥", "💥", "💥"];
@@ -1727,7 +3071,38 @@ document.addEventListener("pointerdown", function(event) {
     }
 });
       </script>
-
-
+      <script>
+    const welcomeDialog =
+        document.getElementById("welcomeDialog");
+    
+    const enterWarriors =
+        document.getElementById("enterWarriors");
+    
+    
+    // Check whether the dialog was already shown
+    if (sessionStorage.getItem("stwWelcomeShown") === "true") {
+        
+        welcomeDialog.style.display = "none";
+        
+    } else {
+        
+        // Show dialog for the first visit
+        welcomeDialog.style.display = "flex";
+        
+    }
+    
+    
+    // ENTER THE ZONE
+    enterWarriors.addEventListener("click", () => {
+        
+        sessionStorage.setItem(
+            "stwWelcomeShown",
+            "true"
+        );
+        
+        welcomeDialog.classList.add("hide");
+        
+    });
+</script>
 </body>
 </html>
